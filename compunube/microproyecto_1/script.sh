@@ -1,7 +1,6 @@
 echo "********************"
 echo "*  INICIANDO CONF  *"
 echo "********************"
-sudo -i
 
 echo "*****************************"
 echo "*  Instalación de paquetes  *"
@@ -15,6 +14,10 @@ echo "************************************"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 source ~/.bashrc
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
  
 echo "************************************"
 echo "*  Instalación de NodeJs v16.18.0  *"
@@ -32,3 +35,12 @@ sudo apt update && sudo apt install consul -y
 consul -v
 
 
+echo "************************************"
+echo "*       Instalación de LXD         *"
+echo "************************************"
+sudo apt-get install lxd -y
+newgrp lxd
+lxd init --auto
+lxc launch ubuntu:18.04 web1
+lxc launch ubuntu:18.04 web2
+lxc launch ubuntu:18.04 web3
